@@ -248,6 +248,93 @@
     .new-ticket .grid{grid-template-columns:1fr;}
   }
   :focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  /* ===================== Pulido visual ===================== */
+  :root{
+    --shadow-sm:0 1px 2px rgba(32,38,31,.06), 0 1px 1px rgba(32,38,31,.04);
+    --shadow-md:0 6px 20px rgba(32,38,31,.09), 0 2px 6px rgba(32,38,31,.05);
+    --shadow-lg:0 16px 40px rgba(32,38,31,.14), 0 4px 12px rgba(32,38,31,.08);
+  }
+
+  /* Transiciones base para todo lo interactivo */
+  button, a, input, select, textarea, .navbtn, .card, .infoblock, .dash-card, .kpi{
+    transition:background-color .15s ease, border-color .15s ease, box-shadow .18s ease, transform .12s ease, color .15s ease;
+  }
+
+  /* Profundidad sutil en tarjetas y bloques */
+  .card, .infoblock, .dash-card, .kpi, .new-ticket, .recibo, .config-row .infoblock{
+    box-shadow:var(--shadow-sm);
+  }
+  .card:hover, .dash-card:hover{
+    box-shadow:var(--shadow-md);
+    transform:translateY(-1px);
+  }
+
+  /* Botones: elevación al pasar el mouse, leve compresión al hacer clic */
+  .btn{box-shadow:var(--shadow-sm);}
+  .btn:hover{box-shadow:var(--shadow-md); transform:translateY(-1px);}
+  .btn:active{transform:translateY(0) scale(.97); box-shadow:none;}
+  .btn.primary:hover{box-shadow:0 6px 18px rgba(14,122,86,.28);}
+
+  /* Foco más suave en campos de formulario (anillo en vez de contorno duro) */
+  input:not([type="checkbox"]):focus, select:focus, textarea:focus{
+    outline:none !important;
+    border-color:var(--navy) !important;
+    box-shadow:0 0 0 3px rgba(14,122,86,.14);
+  }
+
+  /* Barra lateral: acento visual en la solapa activa */
+  .navbtn{position:relative;}
+  .navbtn::before{
+    content:'';position:absolute;left:-10px;top:50%;transform:translateY(-50%) scaleY(0);
+    width:3px;height:60%;background:var(--brass);border-radius:0 3px 3px 0;
+    transition:transform .18s ease;
+  }
+  .navbtn.active::before{transform:translateY(-50%) scaleY(1);}
+  .navbtn:hover:not(.active){background:rgba(255,255,255,0.055);transform:translateX(1px);}
+
+  /* Transición de contenido al cambiar de solapa */
+  @keyframes fadeInUp{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .panel.active{animation:fadeInUp .28s ease;}
+
+  /* Tablas: resalte de fila más marcado y transición pareja */
+  .ledger tbody tr{transition:background-color .12s ease;}
+
+  /* KPIs destacados con leve textura de borde */
+  .kpi.highlight{box-shadow:var(--shadow-sm), inset 0 0 0 1px rgba(14,122,86,.08);}
+
+  /* Estado "guardando" con pulso sutil */
+  @keyframes pulseDot{
+    0%,100%{opacity:1;} 50%{opacity:.35;}
+  }
+  .status.saving .dot{animation:pulseDot 1s ease-in-out infinite;}
+
+  /* Barra de scroll más discreta (navegadores WebKit) */
+  ::-webkit-scrollbar{width:10px; height:10px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:#C7D0C9; border-radius:20px; border:2px solid var(--paper);}
+  ::-webkit-scrollbar-thumb:hover{background:#AEBBB1;}
+
+  /* Logo y marca: leve interacción */
+  .sidebar .brand img{transition:transform .3s ease;}
+  .sidebar .brand:hover img{transform:scale(1.03);}
+
+  /* Botón primario con leve degradé para dar más cuerpo */
+  .btn.primary{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  }
+  .btn.primary:hover{
+    background:linear-gradient(180deg, #128F63 0%, var(--navy-deep) 100%);
+  }
+
+  /* Topbar con leve sombra para separarlo del contenido al hacer scroll */
+  .topbar{box-shadow:0 1px 0 rgba(32,38,31,.05);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -631,8 +718,8 @@
       y ponelo en APPS_SCRIPT_TOKEN — tiene que ser IGUAL al que pongas
       dentro del script de Google (variable SECRET).
    ===================================================================== */
-const APPS_SCRIPT_URL = 'PEGAR_ACA_LA_URL_DEL_NUEVO_APPS_SCRIPT';
-const APPS_SCRIPT_TOKEN = 'CAMBIAR-ESTE-TOKEN-CAMPANA2572';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyt072voYWiCgwSlIfjXyegy-HVsgLHnqrFVvY5tFzGS12pFU-axF05hEjcek7ZSbrs_Q/exec';
+const APPS_SCRIPT_TOKEN = '2UsTGfTJDHbrTdCmPsjcKIzOcUNq3IZGBloBVsPU';
 
 (function(){
   const notConfigured = APPS_SCRIPT_URL.indexOf('PEGAR_ACA') !== -1;
