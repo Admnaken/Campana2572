@@ -198,10 +198,31 @@
         .info-bar-inner {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px 26px;
-            padding: 7px 0;
+            gap: 8px 20px;
+            padding: 8px 0;
+        }
+
+        .info-group {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .info-group-left {
+            font-size: 0.82rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            order: 1;
+        }
+
+        .info-group-right {
+            gap: 14px;
+            order: 3;
         }
 
         .info-item {
@@ -212,7 +233,8 @@
             white-space: nowrap;
         }
 
-        .info-item i {
+        .info-item i,
+        .info-group-left i {
             color: var(--gold);
             font-size: 0.85rem;
         }
@@ -239,22 +261,35 @@
             color: rgba(255, 255, 255, 0.4);
             font-style: italic;
             white-space: nowrap;
+            order: 2;
+            margin: 0 auto;
         }
 
         @media (max-width: 768px) {
             .info-bar-inner {
+                justify-content: center;
                 gap: 6px 16px;
                 padding: 6px 0;
             }
 
+            .info-group-left,
             .info-item {
                 font-size: 0.72rem;
             }
 
+            .info-group-left {
+                order: 1;
+            }
+
+            .info-group-right {
+                order: 2;
+            }
+
             .info-updated {
+                order: 3;
                 width: 100%;
                 text-align: center;
-                order: 99;
+                margin: 2px 0 0;
             }
         }
 
@@ -1880,23 +1915,26 @@
         <!-- BARRA DE CLIMA Y DÓLAR -->
         <div class="info-bar" id="infoBar">
             <div class="container info-bar-inner">
-                <div class="info-item" id="infoWeather">
+                <div class="info-group info-group-left" id="infoWeather">
                     <i class="fas fa-cloud-sun"></i>
                     <span class="info-label">CABA:</span>
                     <span class="info-value" id="weatherValue">Cargando clima…</span>
                 </div>
-                <div class="info-divider"></div>
-                <div class="info-item" id="infoDolarOficial">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span class="info-label">Dólar Oficial:</span>
-                    <span class="info-value" id="dolarOficialValue">Cargando…</span>
-                </div>
-                <div class="info-divider"></div>
-                <div class="info-item" id="infoDolarBlue">
-                    <span class="info-label">Blue:</span>
-                    <span class="info-value" id="dolarBlueValue">Cargando…</span>
-                </div>
+
                 <span class="info-updated" id="infoUpdated"></span>
+
+                <div class="info-group info-group-right">
+                    <div class="info-item" id="infoDolarOficial">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span class="info-label">Dólar Oficial:</span>
+                        <span class="info-value" id="dolarOficialValue">Cargando…</span>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-item" id="infoDolarBlue">
+                        <span class="info-label">Blue:</span>
+                        <span class="info-value" id="dolarBlueValue">Cargando…</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
